@@ -1,0 +1,34 @@
+{
+    "name": "brazilianfriendsofsymfony/frete-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony BFOSFreteBundle",
+    "keywords": ["Brasil frete shipping"],
+    "homepage": "http://www.duocriativa.com.br/bfos",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paulo Roberto Ribeiro",
+            "email": "paulo@duocriativa.com.br"
+        },
+        {
+            "name": "BrazilianFriendsOfSymfony Community",
+            "homepage": "https://github.com/BrazilianFriendsOfSymfony/BFOSFreteBundle/contributors"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.1.*"
+    },
+    "require-dev": {
+        "twig/twig": "*",
+        "doctrine/doctrine-bundle": "*",
+        "swiftmailer/swiftmailer": "*",
+        "symfony/yaml": "2.1.*",
+        "symfony/validator": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "BFOS\\FreteBundle": "" }
+    },
+    "target-dir": "BFOS/FreteBundle"
+}
