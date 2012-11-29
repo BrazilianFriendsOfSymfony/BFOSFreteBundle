@@ -3,6 +3,7 @@
 namespace BFOS\FreteBundle\Correios;
 
 use BFOS\FreteBundle\Utils\Browser;
+use BFOS\FreteBundle\Model\ParametrosConsultaCorreios;
 use BFOS\FreteBundle\Utils\Converter;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -12,7 +13,6 @@ class CorreiosManager
 
     private $em;
 
-
     function __construct(ContainerInterface $container)
     {
         $this->container  = $container;
@@ -20,31 +20,22 @@ class CorreiosManager
         $this->logger     = $container->get('logger');
     }
 
-    public function consultaCorreiosXml(array $options)
+    public function consultaCorreiosXml(ParametrosConsultaCorreios $params)
     {
-
-        $url = 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?'.
-            'nCdEmpresa='. $options['codigo_empresa'].
-            '&sDsSenha='. $options['senha'].
-            '&nCdServico='. $options['codigo_servico'].
-            '&sCepOrigem='. $options['cep_origem'].
-            '&sCepDestino='. $options['cep_destino'].
-            '&nVlPeso='. $options['peso'].
-            '&nCdFormato='. $options['formato'].
-            '&nVlComprimento='. $options['comprimento'].
-            '&nVlAltura='. $options['altura'].
-            '&nVlLargura='. $options['largura'].
-            '&nVlDiametro='. $options['diametro'].
-            '&sCdMaoPropria='. $options['mao_propria'].
-            '&nVlValorDeclarado='. $options['valor_declarado'].
-            '&sCdAvisoRecebimento='. $options['aviso_recebimento'].
-            '&StrRetorno='. $options['tipo_retorno']
-            ;
+        $url = $params->getUrlConsulta();
 
         $xml = Browser::get($url);
         $converter = new Converter();
         $conteudo = $converter->xmlToArray($xml);
 
         return $conteudo;
+    }
+
+    /**
+     * @return \BFOS\FreteBundle\Model\ParametrosConsultaCorreios
+     */
+    static public function getParametrosConsultaCorreios()
+    {
+        return new ParametrosConsultaCorreios();
     }
 }
