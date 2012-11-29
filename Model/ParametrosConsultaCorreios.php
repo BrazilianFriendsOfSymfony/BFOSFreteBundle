@@ -169,6 +169,9 @@ class ParametrosConsultaCorreios
         $this->mao_propria = 'N';
         $this->aviso_recebimento = 'N';
         $this->valor_declarado = 0;
+        $this->formato = 1;
+        $this->tipo_retorno = 'XML';
+        $this->diametro = 0;
     }
 
     public function setAltura($altura)
@@ -239,7 +242,12 @@ class ParametrosConsultaCorreios
 
     public function setComprimento($comprimento)
     {
-        $this->comprimento = $comprimento;
+
+        if($comprimento>=16) {
+            $this->comprimento = $comprimento;
+        } else {
+            $this->comprimento = 16;
+        }
     }
 
     public function getComprimento()
@@ -343,11 +351,11 @@ class ParametrosConsultaCorreios
         '&nCdServico='. $codigoServico.
         '&sCepOrigem='. $this->cepOrigem.
         '&sCepDestino='. $this->cepDestino.
-        '&nVlPeso='. $this->peso.
+        '&nVlPeso='. str_replace('.', ',', $this->peso).
         '&nCdFormato='. $this->formato.
-        '&nVlComprimento='. $this->comprimento.
-        '&nVlAltura='. $this->altura.
-        '&nVlLargura='. $this->largura.
+        '&nVlComprimento='. str_replace('.', ',', $this->comprimento) .
+        '&nVlAltura='. str_replace('.', ',', $this->altura) .
+        '&nVlLargura='. str_replace('.', ',', $this->largura).
         '&nVlDiametro='. $this->diametro.
         '&sCdMaoPropria='. $this->mao_propria.
         '&nVlValorDeclarado='. $this->valor_declarado.

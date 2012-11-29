@@ -32,6 +32,10 @@ class Converter
      * @return mixed
      */
     function xml2array($source, $arr){
+
+        if($source===""){
+            return array();
+        }
         /**
          * @var SimpleXMLElement $xml
          */

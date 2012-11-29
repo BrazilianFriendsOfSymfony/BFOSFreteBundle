@@ -31,11 +31,38 @@ class CorreiosManager
         return $conteudo;
     }
 
+    static public $servicoDescricao = array(
+        40010 =>'SEDEX sem contrato',
+        41106 => 'PAC sem contrato'
+    );
+
+    static public $servicoDescricaoPublica = array(
+        40010 =>'SEDEX',
+        41106 => 'PAC'
+    );
+
     /**
-     * @return \BFOS\FreteBundle\Model\ParametrosConsultaCorreios
+     * @param $codigo
+     * @return string
      */
-    static public function getParametrosConsultaCorreios()
+    static public function getServicoDescricao($codigo)
     {
-        return new ParametrosConsultaCorreios();
+        if(isset(self::$servicoDescricao[(int) $codigo])){
+            return self::$servicoDescricao[(int) $codigo];
+        }
+        return '';
     }
+
+    /**
+     * @param $codigo
+     * @return string
+     */
+    static public function getServicoDescricaoPublica($codigo)
+    {
+        if(isset(self::$servicoDescricaoPublica[(int) $codigo])){
+            return self::$servicoDescricaoPublica[(int) $codigo];
+        }
+        return '';
+    }
+
 }
