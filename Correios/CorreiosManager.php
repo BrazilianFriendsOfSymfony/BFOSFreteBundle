@@ -28,6 +28,24 @@ class CorreiosManager
         $converter = new Converter();
         $conteudo = $converter->xmlToArray($xml);
 
+        foreach ( $conteudo as $key => $value ) {
+            if(isset($conteudo[$key]['Valor'])){
+                $conteudo[$key]['Valor'] = (float) str_replace(',', '.', $conteudo[$key]['Valor']);
+            }
+            if(isset($conteudo[$key]['ValorMaoPropria'])){
+                $conteudo[$key]['ValorMaoPropria'] = (float) str_replace(',', '.', $conteudo[$key]['ValorMaoPropria']);
+            }
+            if(isset($conteudo[$key]['ValorAvisoRecebimento'])){
+                $conteudo[$key]['ValorAvisoRecebimento'] = (float) str_replace(',', '.', $conteudo[$key]['ValorAvisoRecebimento']);
+            }
+            if(isset($conteudo[$key]['ValorValorDeclarado'])){
+                $conteudo[$key]['ValorValorDeclarado'] = (float) str_replace(',', '.', $conteudo[$key]['ValorValorDeclarado']);
+            }
+            if(isset($conteudo[$key]['PrazoEntrega'])){
+                $conteudo[$key]['PrazoEntrega'] = (integer) str_replace(',', '.', $conteudo[$key]['PrazoEntrega']);
+            }
+        }
+
         return $conteudo;
     }
 

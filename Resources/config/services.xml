@@ -5,12 +5,49 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="bfos_frete.manager.class">BFOS\FreteBundle\Manager\FreteManager</parameter>
         <parameter key="bfos_frete.correios_manager.class">BFOS\FreteBundle\Correios\CorreiosManager</parameter>
+        <parameter key="bfos_frete.correios_factory.class">BFOS\FreteBundle\Factory\CorreiosFactory</parameter>
+
+        <parameter key="bfos_frete.correios_40010_type.class">BFOS\FreteBundle\Form\Type\Correios\Correios40010Type</parameter>
+        <parameter key="bfos_frete.correios_40010_modalidade.class">BFOS\FreteBundle\Modalidade\Correios\Correios40010</parameter>
+
+        <parameter key="bfos_frete.correios_41106_type.class">BFOS\FreteBundle\Form\Type\Correios\Correios41106Type</parameter>
+        <parameter key="bfos_frete.correios_41106_modalidade.class">BFOS\FreteBundle\Modalidade\Correios\Correios41106</parameter>
     </parameters>
 
     <services>
+
+        <!--Frete Manager-->
+        <service id="bfos_frete.manager" class="%bfos_frete.manager.class%">
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <!--Correios Manager-->
         <service id="bfos_frete.correios_manager" class="%bfos_frete.correios_manager.class%">
             <argument type="service" id="service_container" />
+        </service>
+
+        <!--Correios Factory-->
+        <service id="bfos_frete.correios_manager" class="%bfos_frete.correios_manager.class%">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <!--Modalidades de frete dos Correios-->
+
+        <!--40010  SEDEX sem contrato-->
+        <!--<service id="bfos_frete.correios_40010_type" class="%bfos_frete.correios_40010_type.class%" />-->
+        <service id="bfos_frete.correios_40010" class="%bfos_frete.correios_40010_modalidade.class%">
+            <argument>%bfos_frete.correios_40010_type.class%</argument>
+            <argument type="service" id="bfos_frete.correios_manager" />
+            <tag name="bfos_frete.modalidade" />
+        </service>
+
+        <!--41106  PAC sem contrato-->
+        <!--<service id="bfos_frete.correios_41106_type" class="%bfos_frete.correios_41106_type.class%" />-->
+        <service id="bfos_frete.correios_41106" class="%bfos_frete.correios_41106_modalidade.class%">
+            <argument>%bfos_frete.correios_41106_type.class%</argument>
+            <tag name="bfos_frete.modalidade" />
         </service>
 
     </services>
