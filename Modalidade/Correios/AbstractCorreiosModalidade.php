@@ -18,7 +18,7 @@ abstract class AbstractCorreiosModalidade implements ModalidadeFreteInterface {
     const FORMATO_ROLO_PRISMA = 2;
     const FORMATO_ENVELOPE = 3;
 
-    protected function formatarResultadoConsulta($resultado){
+    protected function  formatarResultadoConsulta($resultado){
         $resultado = reset($resultado);
         $formatado = array();
 

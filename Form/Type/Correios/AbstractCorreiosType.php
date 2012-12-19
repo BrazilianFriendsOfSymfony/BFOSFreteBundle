@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AbstractCorreiosType extends AbstractType
 {
@@ -33,8 +34,14 @@ class AbstractCorreiosType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $constraints = array(
-            'cep_origem'  => new Length( array( "min" => 8, "max" => 8 ) ),
-            'cep_destino' => new Length( array( "min" => 8, "max" => 8 ) )
+            'cep_origem'  => array(
+                new NotBlank(),
+                new Length( array( "min" => 8, "max" => 8 ) )
+            ),
+            'cep_destino' => array(
+                new NotBlank(),
+                new Length( array( "min" => 8, "max" => 8 ) )
+            )
         );
         $collectionConstraint = new Collection( $constraints );
 
