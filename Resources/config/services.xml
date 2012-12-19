@@ -47,6 +47,7 @@
         <!--<service id="bfos_frete.correios_41106_type" class="%bfos_frete.correios_41106_type.class%" />-->
         <service id="bfos_frete.correios_41106" class="%bfos_frete.correios_41106_modalidade.class%">
             <argument>%bfos_frete.correios_41106_type.class%</argument>
+            <argument type="service" id="bfos_frete.correios_manager" />
             <tag name="bfos_frete.modalidade" />
         </service>
 

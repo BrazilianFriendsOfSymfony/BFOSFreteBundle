@@ -12,6 +12,8 @@ namespace BFOS\FreteBundle\Modalidade\Correios;
 
 use BFOS\FreteBundle\Modalidade\ModalidadeFreteInterface;
 use Symfony\Component\Form\FormTypeInterface;
+use BFOS\FreteBundle\Correios\CorreiosManager;
+use BFOS\FreteBundle\Model\ParametrosConsultaCorreios;
 
 /**
  * 41106 - PAC sem contrato
@@ -20,9 +22,12 @@ class Correios41106 extends AbstractCorreiosModalidade {
 
     protected $formType;
 
-    function __construct($formType)
+    protected $correiosManager;
+
+    function __construct($formType, CorreiosManager $correiosManager)
     {
         $this->formType = $formType;
+        $this->correiosManager = $correiosManager;
     }
 
 
@@ -74,7 +79,16 @@ class Correios41106 extends AbstractCorreiosModalidade {
      */
     public function consultar( $dados )
     {
-        // TODO: Implement consultar() method.
+        $params = new ParametrosConsultaCorreios();
+        $params->setPeso(isset($dados['peso'])?$dados['peso']:null);
+        $params->setFormato(isset($dados['formato'])?$dados['formato']:null);
+        $params->setAltura(isset($dados['altura'])?$dados['altura']:null);
+        $params->setLargura(isset($dados['largura'])?$dados['largura']:null);
+        $params->setComprimento(isset($dados['comprimento'])?$dados['comprimento']:null);
+        $params->setCepOrigem(isset($dados['cep_origem'])?$dados['cep_origem']:null);
+        $params->setCepDestino(isset($dados['cep_destino'])?$dados['cep_destino']:null);
+        $params->setCodigoServico(array('41106'));
+        return $this->formatarResultadoConsulta($this->correiosManager->consultaCorreiosXml($params));
     }
 
 

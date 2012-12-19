@@ -24,7 +24,7 @@ class ParametrosConsultaCorreios
     protected $senha;
 
     /**
-     * O código do serviço é o tipo de serviço que será consultado, por exemplo, 40010 -> SEDEX sem contrato.
+     * O código do serviço é o tipo de serviço que será consultado, por exemplo,        -> SEDEX sem contrato.
      * Pode consultar mais de um tipo de serviço em cada consulta 
      * 
      * @var array $codigoServico
