@@ -14,6 +14,7 @@ use BFOS\FreteBundle\Modalidade\ModalidadeFreteInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use BFOS\FreteBundle\Correios\CorreiosManager;
 use BFOS\FreteBundle\Model\ParametrosConsultaCorreios;
+use BFOS\FreteBundle\Exception\ConsultaCorreiosInvalidaException;
 
 /**
  * 40010 - Sedex sem contrato
@@ -87,7 +88,11 @@ class Correios40010 extends AbstractCorreiosModalidade {
         $params->setCepOrigem(isset($dados['cep_origem'])?$dados['cep_origem']:null);
         $params->setCepDestino(isset($dados['cep_destino'])?$dados['cep_destino']:null);
         $params->setCodigoServico(array('40010'));
-        return $this->formatarResultadoConsulta($this->correiosManager->consultaCorreiosXml($params));
+        $resultadoCorreios = $this->correiosManager->consultaCorreiosXml( $params );
+        if(isset($resultadoCorreios[0]['Erro']) && $resultadoCorreios[0]['Erro']){
+            throw new ConsultaCorreiosInvalidaException(isset($resultadoCorreios[0]['MsgErro'])?$resultadoCorreios[0]['MsgErro']:'', $resultadoCorreios[0]['Erro']);
+        }
+        return $this->formatarResultadoConsulta( $resultadoCorreios );
     }
 
 
