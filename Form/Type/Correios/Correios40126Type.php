@@ -30,7 +30,7 @@ class Correios40045Type extends AbstractProdutoCorreiosType
     {
         parent::buildForm( $builder, $options );
 
-        $builder->add('valor_declarado', 'number', array( 'required' => true ));
+        $builder->add('valor_declarado', 'money', array('currency'=>'BRL', 'required'=>true));
 
     }
 
@@ -38,14 +38,18 @@ class Correios40045Type extends AbstractProdutoCorreiosType
     {
         parent::setDefaultOptions($resolver);
         $constraints = array(
-            'valor_declarado' => array(
+            'valor_declarado'  => array(
                 new NotBlank(
-                    array( 'message' => 'O valor declarado não pode ser inferior a R$ 12,00' )
+                    array( 'message' => 'Valor declarado é obrigatório para essa modalidade.' )
+                ),
+                new Range(
+                    array( 'min' => 12, 'minMessage' => 'O valor declarado não pode ser inferior a R$ 12,00')
                 )
-            ),
+            )
         );
 
         $constraints = array_merge($this->constraints, $constraints);
+        $this->constraints = $constraints;
         $collectionConstraint = new Collection( $constraints );
         $resolver->setDefaults(array(
             'constraints' => $collectionConstraint
