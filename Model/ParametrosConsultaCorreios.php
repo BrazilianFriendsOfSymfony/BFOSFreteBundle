@@ -87,14 +87,14 @@ class ParametrosConsultaCorreios
     /**
      * Comprimento da encomenda (incluindo embalagem), em centímetros
      *
-     * @var decimal $comprimento
+     * @var float $comprimento
      */
     protected $comprimento;
 
     /**
      * Altura da encomenda (incluindo embalagem), em centímetros. Se o formato for envelope, informar zero (0)
      *
-     * @var decimal $altura
+     * @var float $altura
      *
      * @Assert\NotBlank()
      */
@@ -103,7 +103,7 @@ class ParametrosConsultaCorreios
     /**
      * Largura da encomenda (incluindo embalagem), em centímetros.
      *
-     * @var decimal $largura
+     * @var float $largura
      *
      * @Assert\NotBlank()
      * @Assert\Min(limit="11")
@@ -113,7 +113,7 @@ class ParametrosConsultaCorreios
     /**
      * Diâmetro da encomenda (incluindo embalagem), em centímetros.
      *
-     * @var decimal $diametro
+     * @var float $diametro
      *
      * @Assert\NotBlank()
      */
@@ -133,7 +133,7 @@ class ParametrosConsultaCorreios
      * Indica se a encomenda será entregue com o serviço adicional valor declarado. Neste campo deve ser apresentado o valor declarado desejado, em Reais.
      * Se não optar pelo serviço informar zero.
      *
-     * @var decimal $valor_declarado
+     * @var float $valor_declarado
      *
      * @Assert\NotBlank()
      */
@@ -176,7 +176,11 @@ class ParametrosConsultaCorreios
 
     public function setAltura($altura)
     {
-        $this->altura = $altura;
+        if($altura < 16){ // altura mínima, exigência dos Correios
+            $this->altura = 16;
+        } else {
+            $this->altura = $altura;
+        }
     }
 
     public function getAltura()
@@ -277,7 +281,11 @@ class ParametrosConsultaCorreios
 
     public function setLargura($largura)
     {
-        $this->largura = $largura;
+        if($largura<16){ // largura mínima, exigência dos Correios
+            $this->largura = 16;
+        } else {
+            $this->largura = $largura;
+        }
     }
 
     public function getLargura()

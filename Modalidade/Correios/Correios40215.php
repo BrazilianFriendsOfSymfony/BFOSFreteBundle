@@ -16,9 +16,9 @@ use BFOS\FreteBundle\Correios\CorreiosManager;
 use BFOS\FreteBundle\Model\ParametrosConsultaCorreios;
 
 /**
- * 40010 - Sedex sem contrato
+ * 40215 - SEDEX 10, sem contrato
  */
-class Correios40010 extends AbstractCorreiosModalidade {
+class Correios40215 extends AbstractCorreiosModalidade {
 
     protected $formType;
 
@@ -38,7 +38,7 @@ class Correios40010 extends AbstractCorreiosModalidade {
      */
     public function getNome()
     {
-        return 'correios_40010';
+        return 'correios_40215';
     }
 
     /**
@@ -48,7 +48,7 @@ class Correios40010 extends AbstractCorreiosModalidade {
      */
     public function getTitulo()
     {
-        return 'Sedex';
+        return 'Sedex 10';
     }
 
     /**

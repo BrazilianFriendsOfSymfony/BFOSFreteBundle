@@ -17,9 +17,9 @@ use BFOS\FreteBundle\Model\ParametrosConsultaCorreios;
 use BFOS\FreteBundle\Exception\ConsultaCorreiosInvalidaException;
 
 /**
- * 81019 - Sedex com contrato
+ * 81027 - e-SEDEX Prioritário, com conrato
  */
-class Correios81019 extends AbstractCorreiosModalidade {
+class Correios81027 extends AbstractCorreiosModalidade {
 
     protected $formType;
 
@@ -39,7 +39,7 @@ class Correios81019 extends AbstractCorreiosModalidade {
      */
     public function getNome()
     {
-        return 'correios_81019';
+        return 'correios_81027';
     }
 
     /**
@@ -49,7 +49,7 @@ class Correios81019 extends AbstractCorreiosModalidade {
      */
     public function getTitulo()
     {
-        return 'Sedex';
+        return 'e-Sedex';
     }
 
     /**

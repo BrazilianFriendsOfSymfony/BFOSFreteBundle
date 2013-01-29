@@ -22,8 +22,6 @@ class CorreiosManager
 
     public function consultaCorreiosXml(ParametrosConsultaCorreios $params)
     {
-        $larguraMin = 16;
-        $alturaMin = 16;
 
         $url = $params->getUrlConsulta();
 
