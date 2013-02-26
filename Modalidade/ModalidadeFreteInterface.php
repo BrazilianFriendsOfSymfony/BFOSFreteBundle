@@ -16,6 +16,7 @@ namespace BFOS\FreteBundle\Modalidade;
  * @author Paulo Ribeiro <paulo@duocriativa.com.br>
  */
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormTypeInterface;
 
 interface ModalidadeFreteInterface {
 
@@ -52,7 +53,7 @@ interface ModalidadeFreteInterface {
      *  'prazo_entrega' => 10,
      *  'valor' => 1.99,
      * )
-     * @param $dados Dados para a consulta do frete.
+     * @param array $dados para a consulta do frete.
      * @return array
      */
     public function consultar($dados);
