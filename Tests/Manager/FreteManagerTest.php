@@ -29,7 +29,7 @@ class FreteManagerTest extends WebTestCase
         );
 
         try {
-            $freteManager->consultar( new \Exception(), array() );
+            $freteManager->consultar(new \Exception(), array());
             $this->assertTrue(false, 'Não está disparando a exceção que devia.');
         } catch (\Exception $e) {
             $this->assertInstanceOf('BFOS\FreteBundle\Exception\TipoDeObjetoInvalidoException', $e);
@@ -43,11 +43,13 @@ class FreteManagerTest extends WebTestCase
         $this->assertTrue(isset($resultado['valor']) && is_float($resultado['valor']), 'Parâmetro valor é float.');
 
         $this->assertArrayHasKey('prazo_entrega', $resultado, 'Parâmetro prazo_entrega está definido.');
-        $this->assertTrue(isset($resultado['prazo_entrega']) && is_integer($resultado['prazo_entrega']), 'Parâmetro prazo_entrega é inteiro.');
+        $this->assertTrue(
+            isset($resultado['prazo_entrega']) && is_integer($resultado['prazo_entrega']),
+            'Parâmetro prazo_entrega é inteiro.'
+        );
 
         $resultado = $freteManager->consultar('correios_40010', array('cep_origem' => '13084012'));
         $this->assertTrue($resultado===false, 'Com parâmetros insuficientes, deveria retornar false.');
-
 
     }
 }
